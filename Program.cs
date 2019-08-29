@@ -124,6 +124,24 @@ namespace ConsoleApplication
             //_xmldocument.Save("gamecc666.xml");
             Console.WriteLine("xml文件操作结束！");
             #endregion
+            #region 模块四：路径测试
+            /* KeyNote:
+             *       1: '..'代表上级目录
+             */
+            Console.WriteLine("---------------------路径测试--------------------");
+            XmlDocument _xd = new XmlDocument();
+            XmlDeclaration _dec = _xd.CreateXmlDeclaration("1.0", "utf-8", "yes");
+            _xd.AppendChild(_dec);
+            XmlElement _pen = _xd.CreateElement("Persion");
+            _pen.SetAttribute("格格", "XXX");
+            _xd.AppendChild(_pen);
+            //保存文件
+            Console.WriteLine("当前目录的完全限定路径："+ Environment.CurrentDirectory);
+            Console.WriteLine("当前应用程序的工作目录："+System.IO.Directory.GetCurrentDirectory());
+            _xd.Save("../../../TestXml/gamecc666.xml");
+            
+          
+            #endregion
         }
 
         #region 模块一：测试泛型方法
