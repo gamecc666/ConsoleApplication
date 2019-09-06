@@ -139,9 +139,9 @@ namespace ConsoleApplication
             Console.WriteLine("当前目录的完全限定路径："+ Environment.CurrentDirectory);
             Console.WriteLine("当前应用程序的工作目录："+System.IO.Directory.GetCurrentDirectory());
             _xd.Save("../../../TestXml/gamecc666.xml");
-            
-          
-            #endregion
+
+
+            #endregion         
         }
 
         #region 模块一：测试泛型方法
