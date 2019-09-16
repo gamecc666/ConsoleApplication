@@ -1,6 +1,8 @@
-﻿using System;
+﻿using IronPython.Hosting;
+using System;
 using System.Collections.Generic;
 using System.Xml;
+
 
 namespace ConsoleApplication
 {
@@ -8,6 +10,46 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
+            #region C#使用Python包
+            Console.WriteLine("--------------------C#使用Pathon包--------------------");
+            var pythonEngine = Python.CreateEngine();
+            //var Index = Directory.GetCurrentDirectory().LastIndexOf("bin");
+            //var strpath = Directory.GetCurrentDirectory().Remove(Index) + @"PythonLibrary\PyLib.py";
+
+            //var pyText = Convert.ToBase64String(File.ReadAllBytes(new FileInfo(strpath).ToString()));
+            //var CodeString = Encoding.UTF8.GetString(Convert.FromBase64String(pyText));
+            //读取文件 方法一`
+            //var script = pythonEngine.CreateScriptSourceFromString(CodeString);
+            //读取文件 方法二` 同样适用
+            var script = pythonEngine.CreateScriptSourceFromFile("../../../PythonLibrary/PyLib.py");
+            var code = script.Compile(); //编译
+
+            var scope = pythonEngine.CreateScope();
+            code.Execute(scope);
+            //调用py方法,不带参数
+            //var _func = scope.GetVariable("SayWord");
+            //var CustomerData = _func();
+
+            //调用py方法,带参数
+            var _func = scope.GetVariable("GetSum");
+            var CustomerData = _func(12,26);
+
+            Console.WriteLine($"得到的最终结果是：{CustomerData}");
+
+            #endregion
+            #region 测试对象为空不为空
+            Console.WriteLine("------------------测试对象为空不为空-----------------");
+            Persion sb =null;
+            //Persion sb = new Persion();
+            if(sb is null)
+            {
+                Console.WriteLine("对象为空");
+            }
+            else
+            {
+                Console.WriteLine("对象不为空");
+            }
+            #endregion
             #region 模块一：测试泛型方法
             Console.WriteLine("---------------------测试泛型方法--------------------");
             dynamic obj = new Persion();
@@ -142,6 +184,7 @@ namespace ConsoleApplication
 
 
             #endregion         
+
         }
 
         #region 模块一：测试泛型方法
