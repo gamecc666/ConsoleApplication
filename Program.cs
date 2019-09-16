@@ -1,6 +1,8 @@
 ﻿using IronPython.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Xml;
 
 
@@ -11,6 +13,12 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
             #region C#使用Python包
+            /* 
+             * KeyNote:
+             *       1:IndexOf()与LastIndexOf()的区别：都是取第一次出现时候的索引，前者从前往后，后者从后往前；唯一不变的是字符串的索引不变索然是从后往前查
+             *                                         但是索引和从前往后查的索引一样，都是从0开始
+             *       2:详细参考网址：https://www.cnblogs.com/pasoraku/p/4906715.html
+             */
             Console.WriteLine("--------------------C#使用Pathon包--------------------");
             var pythonEngine = Python.CreateEngine();
             //var Index = Directory.GetCurrentDirectory().LastIndexOf("bin");
@@ -18,21 +26,21 @@ namespace ConsoleApplication
 
             //var pyText = Convert.ToBase64String(File.ReadAllBytes(new FileInfo(strpath).ToString()));
             //var CodeString = Encoding.UTF8.GetString(Convert.FromBase64String(pyText));
-            //读取文件 方法一`
+            //读取文件 方法一
             //var script = pythonEngine.CreateScriptSourceFromString(CodeString);
-            //读取文件 方法二` 同样适用
+            //读取文件 方法二
             var script = pythonEngine.CreateScriptSourceFromFile("../../../PythonLibrary/PyLib.py");
             var code = script.Compile(); //编译
 
             var scope = pythonEngine.CreateScope();
-            code.Execute(scope);
+            var executeres= code.Execute(scope);
             //调用py方法,不带参数
             //var _func = scope.GetVariable("SayWord");
             //var CustomerData = _func();
 
             //调用py方法,带参数
             var _func = scope.GetVariable("GetSum");
-            var CustomerData = _func(12,26);
+            var CustomerData = _func(555,445);
 
             Console.WriteLine($"得到的最终结果是：{CustomerData}");
 
