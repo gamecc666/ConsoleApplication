@@ -12,6 +12,27 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
+            #region 字符串的拼接
+            Console.WriteLine("-------------------字符串数组的拼接操作-------------------");
+            string[] _arr = new string[] { "liu", "yue", "can" };          
+            //string _res = string.Join("|", _arr);
+            //将字符串数组组装成是字符串
+            string _res = string.Join("", _arr);
+            Console.WriteLine("链接后的结果是：" + _res);
+
+            List<string> _demo = new List<string>();
+            _demo.Add("you");
+            _demo.Add("can");
+            _demo.Add("fly");
+            string[] _arrlist = _demo.ToArray();
+            //foreach (var item in _arrlist)
+            //{
+            //    Console.WriteLine("子元素：" + item);
+            //}
+            string _ss = string.Join("|", _arrlist);
+            Console.WriteLine("最终结果是："+_ss);
+            #endregion
+
             #region C#使用Python包
             /* 
              * KeyNote:
