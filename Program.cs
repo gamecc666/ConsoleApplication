@@ -13,6 +13,10 @@ namespace ConsoleApplication
         static void Main(string[] args)
         {
             #region 字符串的拼接
+            /*
+             * KeyNote:
+             *       1:对于字符串的拼接使用 Join,拆分的话使用 Split()
+             */
             Console.WriteLine("-------------------字符串数组的拼接操作-------------------");
             string[] _arr = new string[] { "liu", "yue", "can" };          
             //string _res = string.Join("|", _arr);
@@ -26,7 +30,7 @@ namespace ConsoleApplication
             _demo.Add("fly");
             string[] _arrlist = _demo.ToArray();
             //foreach (var item in _arrlist)
-            //{
+            //{                                                       
             //    Console.WriteLine("子元素：" + item);
             //}
             string _ss = string.Join("|", _arrlist);
