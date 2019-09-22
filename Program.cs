@@ -1,8 +1,7 @@
-﻿using IronPython.Hosting;
+﻿using ConsoleApplication.AdapterModel;
+using IronPython.Hosting;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Xml;
 
 
@@ -12,6 +11,18 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
+            #region 适配器模式
+            Console.WriteLine("-----------------------适配器模式-----------------------");
+            CDb db;
+            Console.WriteLine("访问X公司数据");           
+            db = new CDb(EDbType.X);
+            db.LoadData();
+            db.SaveData();
+            Console.WriteLine("访问Y公司数据");
+            db = new CDb(EDbType.Y);
+            db.LoadData();
+            db.SaveData();
+            #endregion
             #region 字符串的拼接
             /*
              * KeyNote:
@@ -36,7 +47,6 @@ namespace ConsoleApplication
             string _ss = string.Join("|", _arrlist);
             Console.WriteLine("最终结果是："+_ss);
             #endregion
-
             #region C#使用Python包
             /* 
              * KeyNote:
