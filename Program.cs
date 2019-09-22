@@ -1,4 +1,5 @@
 ﻿using ConsoleApplication.AdapterModel;
+using ConsoleApplication.IteratorModel;
 using IronPython.Hosting;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,18 @@ namespace ConsoleApplication
     {
         static void Main(string[] args)
         {
+            #region 迭代器模式
+            Console.WriteLine("-----------------------迭代器模式-----------------------");
+            IteratorClass ic = new IteratorClass();
+            ic.Add("Tom");
+            ic.Add("Jerry");
+            ic.Add("John");
+            foreach(var item in ic)
+            {
+                Console.WriteLine("结果是：" + item.ToString());
+            }
+
+            #endregion
             #region 适配器模式
             Console.WriteLine("-----------------------适配器模式-----------------------");
             CDb db;
