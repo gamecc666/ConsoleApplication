@@ -1,8 +1,12 @@
-﻿using IronPython.Hosting;
+﻿using ConsoleApplication.AdapterModel;
+using ConsoleApplication.IteratorModel;
+using ConsoleApplication.StrategyModel;
+using ConsoleApplication.GetObjByStr;
+using IronPython.Hosting;
+using Microsoft.Scripting.Hosting;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Xml;
 
 
@@ -11,7 +15,43 @@ namespace ConsoleApplication
     class Program
     {
         static void Main(string[] args)
-        {
+        {                       
+            #region 迭代器模式
+            Console.WriteLine("-----------------------迭代器模式-----------------------");
+            IteratorClass ic = new IteratorClass();
+            ic.Add("Tom");
+            ic.Add("Jerry");
+            ic.Add("John");
+            foreach(var item in ic)
+            {
+                Console.WriteLine("结果是：" + item.ToString());
+            }
+
+            #endregion
+            #region 适配器模式
+            Console.WriteLine("-----------------------适配器模式-----------------------");
+            CDb db;
+            Console.WriteLine("访问X公司数据");           
+            db = new CDb(EDbType.X);
+            db.LoadData();
+            db.SaveData();
+            Console.WriteLine("访问Y公司数据");
+            db = new CDb(EDbType.Y);
+            db.LoadData();
+            db.SaveData();
+            #endregion
+            #region 策略模式
+            Console.WriteLine("-----------------------策略模式-----------------------");
+            Context con = new Context(new StrategyA());
+            con.ContextInterface();
+            #endregion
+            #region 通过类的字符串名来得到类的实例
+            Console.WriteLine("---------------通过类的字符串名来得到类的实例-------------");
+            IObject obj1 = (IObject)Activator.CreateInstance(Type.GetType("ConsoleApplication.GetObjByStr.Class_01")); //此处需要添加上命名空间否则找不到会报错
+            obj1.PrintName();
+            obj1.Sun(3, 13);
+            #endregion
+
             #region 字符串的拼接
             /*
              * KeyNote:
@@ -36,7 +76,6 @@ namespace ConsoleApplication
             string _ss = string.Join("|", _arrlist);
             Console.WriteLine("最终结果是："+_ss);
             #endregion
-
             #region C#使用Python包
             /* 
              * KeyNote:
@@ -157,7 +196,7 @@ namespace ConsoleApplication
             _persion.AppendChild(_persion2);
 
             XmlElement _persion2_1 = _xmldocument.CreateElement("姓名");
-            _persion2_1.InnerText = "xiaoyu";
+            _persion2_1.InnerText = "xiajhjh";
             _persion2.AppendChild(_persion2_1);
             XmlElement _persion2_2 = _xmldocument.CreateElement("性别");
             _persion2_2.InnerText = "女";
@@ -204,19 +243,39 @@ namespace ConsoleApplication
              *       1: '..'代表上级目录
              */
             Console.WriteLine("---------------------路径测试--------------------");
-            XmlDocument _xd = new XmlDocument();
-            XmlDeclaration _dec = _xd.CreateXmlDeclaration("1.0", "utf-8", "yes");
-            _xd.AppendChild(_dec);
-            XmlElement _pen = _xd.CreateElement("Persion");
-            _pen.SetAttribute("格格", "XXX");
-            _xd.AppendChild(_pen);
-            //保存文件
-            Console.WriteLine("当前目录的完全限定路径："+ Environment.CurrentDirectory);
-            Console.WriteLine("当前应用程序的工作目录："+System.IO.Directory.GetCurrentDirectory());
-            _xd.Save("../../../TestXml/gamecc666.xml");
+            try { 
+                XmlDocument _xd = new XmlDocument();
+                XmlDeclaration _dec = _xd.CreateXmlDeclaration("1.0", "utf-8", "yes");
+                _xd.AppendChild(_dec);
+                XmlElement _pen = _xd.CreateElement("Persion");
+                _pen.SetAttribute("格格", "XXX");
+                _xd.AppendChild(_pen);
+                //保存文件
+                Console.WriteLine("当前目录的完全限定路径："+ Environment.CurrentDirectory);
+                Console.WriteLine("当前应用程序的工作目录："+System.IO.Directory.GetCurrentDirectory());
+                string path = "../../../TestXml/";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                    Console.WriteLine("文件不存在,现已创建成功！");
+                }
+                else
+                {
+                    Console.WriteLine("文件存在");
+                }
+                //_xd.Save(path+"gamecc777.xml");
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.ToString());
+            }
 
 
-            #endregion         
+            #endregion
+            #region 模块五：预定义委托以及Lambda表达式
+            Console.WriteLine("-------------预定义委托以及Lambda表达式--------------");
+
+            #endregion
 
         }
 
