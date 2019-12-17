@@ -1,5 +1,6 @@
 ﻿using ConsoleApplication.AdapterModel;
 using ConsoleApplication.IteratorModel;
+<<<<<<< HEAD
 using ConsoleApplication.StrategyModel;
 using ConsoleApplication.GetObjByStr;
 using IronPython.Hosting;
@@ -7,6 +8,11 @@ using Microsoft.Scripting.Hosting;
 using System;
 using System.Collections.Generic;
 using System.IO;
+=======
+using IronPython.Hosting;
+using System;
+using System.Collections.Generic;
+>>>>>>> f7cdcc4062f05ae8c0a1dc577e5c3d7fb6470f3b
 using System.Xml;
 
 
@@ -15,7 +21,11 @@ namespace ConsoleApplication
     class Program
     {
         static void Main(string[] args)
+<<<<<<< HEAD
         {                       
+=======
+        {
+>>>>>>> f7cdcc4062f05ae8c0a1dc577e5c3d7fb6470f3b
             #region 迭代器模式
             Console.WriteLine("-----------------------迭代器模式-----------------------");
             IteratorClass ic = new IteratorClass();
@@ -40,6 +50,7 @@ namespace ConsoleApplication
             db.LoadData();
             db.SaveData();
             #endregion
+<<<<<<< HEAD
             #region 策略模式
             Console.WriteLine("-----------------------策略模式-----------------------");
             Context con = new Context(new StrategyA());
@@ -52,6 +63,8 @@ namespace ConsoleApplication
             obj1.Sun(3, 13);
             #endregion
 
+=======
+>>>>>>> f7cdcc4062f05ae8c0a1dc577e5c3d7fb6470f3b
             #region 字符串的拼接
             /*
              * KeyNote:
